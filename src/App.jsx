@@ -21,24 +21,31 @@ const App = () => {
     { name: 'Swiss Cheese', color: '#F1E1A8' },
   ];
 
-  const [stack, setStack] = useState([availableIngredients[0]]); //! change to []
+  const [stack, setStack] = useState([]);
 
-  
 
   const addToBurger = (ingredient) => {
-    //TODO
+    setStack([ingredient, ...stack]); // for vertical arrangement
   };
 
-  const removeFromBurger = (ingredient) => {
-    //TODO
+  const removeFromBurger = (index) => {
+    const newStack = [...stack];
+    newStack.splice(index, 1);
+    setStack(newStack);
   };
 
   return (
     <main>
       <h1>Burger Stacker</h1>
       <section>
-        <IngredientList availableIngredients={availableIngredients}/>
-        <BurgerStack stack={stack}/>
+        <IngredientList
+          availableIngredients={availableIngredients}
+          addToBurger={addToBurger}
+        />
+        <BurgerStack
+          stack={stack}
+          removeFromBurger={removeFromBurger}
+        />
       </section>
     </main>
   );
